@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Momo-Carrelage</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 10px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .contact {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            margin-top: 0;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        input[type="text"], input[type="email"], textarea {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        .captcha-container {
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #captcha-image {
+            margin-right: 10px;
+            height: 40px; /* Ajuste la hauteur ici */
+            width: auto;
+        }
+
+        .btn-primary {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background-color: #555;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                  <li><a href="index.html">Accueil</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="gallery.html">Galerie</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="contact">
+        <div class="container">
+            <h2>Contactez-nous</h2>
+            <form id="contact-form">
+                <label for="name">Nom :</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email :</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="message">Message :</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+
+                <div class="captcha-container">
+                    <img src="https://www.learningsuccessblog.com/files/0aainput-black.gif" alt="CAPTCHA Image" id="captcha-image">
+                    <input type="text" id="captcha-input" name="captcha" placeholder="Recopiez le texte ci-dessus" required>
+                </div>
+
+                <button type="submit" class="btn-primary">Envoyer</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Momo-Carrelage. Tous droits réservés.</p>
+    </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.getElementById('contact-form');
+        
+        form.addEventListener('submit', function (event) {
+            event.preventDefault(); // Empêcher le formulaire de soumettre normalement
+            
+            const name = encodeURIComponent(document.getElementById('name').value);
+            const email = encodeURIComponent(document.getElementById('email').value);
+            const message = encodeURIComponent(document.getElementById('message').value);
+            const captcha = encodeURIComponent(document.getElementById('captcha-input').value);
+            
+            // Code CAPTCHA attendu
+            const expectedCaptchaText = 'W68hP'; // Exemple de texte CAPTCHA que l'utilisateur doit entrer
+            
+            // Vérifier le CAPTCHA
+            if (captcha !== expectedCaptchaText) {
+                alert('Le texte CAPTCHA est incorrect. Veuillez réessayer.');
+                return;
+            }
+            
+            const mailtoLink = `mailto:firefoxytb80@gmail.com?subject=Message de contact&body=Nom: ${name}%0AEmail: ${email}%0A%0AMessage:%0A${message}`;
+            
+            // Ouvrir le client de messagerie
+            window.location.href = mailtoLink;
+        });
+    });
+    </script>
+</body>
+</html>
